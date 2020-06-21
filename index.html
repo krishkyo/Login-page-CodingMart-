@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- REACT LIBRARY -->
+    <script src="https://unpkg.com/react@15.5.4/dist/react.js"></script>
+    <!-- REACT-DOM LIBRARY -->
+    <script src="https://unpkg.com/react-dom@15.5.4/dist/react-dom.js"></script>
+    <!-- BABEL LIBRARY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+</head>
+<body>
+    <div id="app">react</div>
+    <script type="text/babel">
+    var Forminput=function(){
+        return(
+            <div className="box" id="box">
+                <form  id="box-input" method="POST">
+                <h1>REGISTER</h1>
+                <input type="text" name="name" placeholder="Username"/>
+                <input type="password" name="new-password" placeholder="New Password"/>
+                <input type="password" name="con-password" placeholder="Confirm Password"/>
+            </form>
+            <span id="demo"></span>
+            <button name="" onClick={myfunc}>ENTER</button>
+            </div>
+            
+        );
+    }
+    ReactDOM.render(
+        <div>
+        <Forminput/>
+        </div>,
+        document.getElementById("app")
+    );
+    var num=0;
+    function myfunc(){
+        if(num === 0){
+            var n = document.getElementById("box-input").elements.namedItem("name").value;
+        var a=document.getElementById("box-input").elements.namedItem("new-password").value;
+        var b=document.getElementById("box-input").elements.namedItem("con-password").value;
+        if(n != "" && a != "" && b != ""){
+            if(a != b || a.length<8 || b.length<8){
+            document.getElementById("demo").style.color="red";
+            document.getElementById("demo").style.fontSize="12px";
+            document.getElementById("demo").innerHTML =  "PASSWORD DOES NOT MATCH OR LESS THAN 8 DIGIT";
+        }else{
+            document.getElementById("demo").innerHTML =  "";
+            database.push({name:n,password:a});
+            console.log(database);
+            var h=document.createElement("H1");
+            var y=document.createTextNode("LOGIN");
+            h.appendChild(y);
+            var x=document.getElementById("box-input");
+            x.innerHTML="";
+            x.appendChild(h);
+            var temp=document.createElement("input");
+            temp.type="text";
+            temp.name="username";
+            temp.placeholder="Username";
+            x.appendChild(temp);
+            var temp=document.createElement("input");
+            temp.type="password";
+            temp.name="password";
+            temp.placeholder="Password";
+            x.appendChild(temp);
+            num++;
+        }
+        }else{
+            document.getElementById("demo").style.color="red";
+            document.getElementById("demo").style.fontSize="12px";
+            document.getElementById("demo").innerHTML =  "Enter the all fields";
+        }
+        }else{
+            var n = document.getElementById("box-input").elements.namedItem("username").value;
+            var a=document.getElementById("box-input").elements.namedItem("password").value;
+            var flag=false;
+            for(var i=0;i<database.length;i++){
+                if(n=== database[i].name && a===database[i].password){
+                    flag=true;
+                    break;
+                }
+            }
+            if(flag){
+                var x=document.getElementById("box");
+                x.innerHTML="";
+                var t=document.createElement("H1");
+                var text=document.createTextNode("Hi "+n+" ,Welcome to CODINGMART");
+                t.appendChild(text);
+                x.appendChild(t);
+            }else{
+                document.getElementById("demo").style.color="red";
+            document.getElementById("demo").style.fontSize="12px";
+            document.getElementById("demo").innerHTML =  "USERNAME AND PASSWORD IS INCORRECT";
+            }
+        }
+        
+        
+    }
+    var database=[{
+        name:"user",
+        password:"123"
+    }];
+    </script>
+</body>
+</html>
